@@ -1,6 +1,7 @@
 Store::Application.routes.draw do
   namespace :backend do
     resource :profile, except: :destroy, controller: :profile
+    resources :products, except: :destroy
 
     get 'sign_in' => 'session#new'
     post 'session' => 'session#create', as: :session_create
@@ -21,7 +22,7 @@ Store::Application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  #   resourcerces :products
 
   # Example resource route with options:
   #   resources :products do

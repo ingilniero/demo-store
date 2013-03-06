@@ -1,7 +1,8 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: store_development
+  database: demo_store_development
+  username: gil
   pool: 5
   host: localhost
 
@@ -11,13 +12,14 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: store_test
+  database: demo_store_test
   pool: 5
   host: localhost
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: store_production
+  database: demo_store_production
+  username: gil
   pool: 5
   host: localhost

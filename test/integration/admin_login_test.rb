@@ -15,7 +15,7 @@ feature 'admin login' do
     end
     click_button 'login'
 
-    assert page.has_text?('Bienvenido admin@store.com')
+    assert page.has_text?('Cerrar sesion')
   end
 
   scenario 'Admin with invalid credentials should see an error' do
@@ -48,9 +48,7 @@ def logout_admin
 end
 
 def login_admin
-  counter = Admin.count + 1
-  email = "admin#{counter}@store.com"
-  Admin.create! email: email, password: 'password', password_confirmation: 'password'
+  email = "one@store.com"
 
   within('#new_admin') do
     fill_in 'admin_email', with: email

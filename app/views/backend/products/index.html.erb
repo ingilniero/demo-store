@@ -1,0 +1,6 @@
+<div><%= link_to 'Nuevo Producto', new_backend_product_path %></div>
+<ul>
+<% @products.each do | product | %>
+	<li><%= link_to product.name, edit_backend_product_path(product) %></li>
+<% end %>
+</ul>

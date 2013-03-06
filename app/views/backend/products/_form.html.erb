@@ -1,0 +1,26 @@
+<%= form_for [:backend, product], :html => { :multipart => true } do | form | %>
+<%= display_alert %>
+
+	<%= form.label :name %>
+	<%= form.text_field :name %>
+	<br />
+	<%= form.label :description %>
+	<%= form.text_area :description %>
+	<br />
+	<%= form.label :price %>
+	<%= form.text_field :price %>
+	<br />
+	<%= form.label :inventory %>
+	<%= form.text_field :inventory %>
+	<br />
+	<%= form.label :active %>
+	<%= form.check_box :active %>
+	<br />
+	<hr />
+	<%= form.fields_for :images do | image_fields | %>
+		<%= image_fields.file_field :photo %>
+	<% end %>
+	<div class='actions'>
+		<%= form.submit %>
+	</div>
+<% end %>
