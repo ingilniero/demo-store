@@ -14,7 +14,7 @@ describe Backend::ProductsController do
 
 	describe 'new' do
 		it 'should display a form' do
-			get :new
+			get :new , {}, { 'admin_id' => 200}
 
 			assert_response :success
 			assert_template :new
@@ -62,7 +62,7 @@ describe Backend::ProductsController do
 
 	describe 'edit' do
 		it 'should edit display a form' do
-			get :edit, { 'id' => 1 }
+			get :edit, { 'id' => 1 }, { 'admin_id' => 100}
 
 			assert_response :success
 			assert_template :edit
