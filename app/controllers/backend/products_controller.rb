@@ -3,7 +3,7 @@ class Backend::ProductsController < ApplicationController
 	before_action :make_inventory_infinite, only: [:create, :update]
 
 	def index
-		@products = Product.scope_products(current_admin).order(:id)
+		@products = Product.scope_products(current_admin)
 	end
 
 	def new
@@ -25,7 +25,7 @@ class Backend::ProductsController < ApplicationController
 	end
 
 	def edit
-		return redirect_to backend_products_path unless current_admin.products.exists?(params[:id])
+		return redirect_to backend_products_path unless Product.scope_products(current_admin).exists?(params[:id])
 		@product = Product.find(params[:id])
 		generate_image_fields_for @product
 	end

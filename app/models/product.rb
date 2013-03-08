@@ -12,8 +12,7 @@ class Product < ActiveRecord::Base
 	validates :inventory, numericality: { :only_integer => true, :greater_than_or_equal_to => -1 }
 	validates :active, inclusion: { :in => [true, false] }
 
-	scope :scope_products, lambda { | admin | where( admin_id: admin ) }
-	scope :scope_product, lambda { | id, admin | where( id: id, admin_id: admin ) }
+	scope :scope_products, lambda { | admin | where( admin_id: admin ).order(:id) }
 
 	Max_Images = 5
 
