@@ -12,23 +12,23 @@
 	<br />
 	<%= form.label :inventory %>
 	<%= form.text_field :inventory %>
+	<%= form.check_box :infinite %>
 	<%= form.label 'Infinito' %>
-	<%= form.check_box :inventory, {},'-1' %>
 	<br />
 	<%= form.label :active %>
 	<%= form.check_box :active %>
 	<br />
 	<hr />
-	<%= form.fields_for :images do | image_fields | %>
+	<%= form.fields_for :images do | image | %>
 
-		<% if image_fields.object.new_record? %>
-			<%= image_fields.file_field :photo %>
+		<% if image.object.new_record? %>
+			<%= image.file_field :photo %>
 		<% end %>
 
-		<% if image_fields.object.photo.file? %>
-			<%= image_tag image_fields.object.photo.url(:medium) %>
- 				<%= image_fields.check_box :_destroy	%>
-			<%= image_fields.label :_destroy, 'Eliminar' %>
+		<% if image.object.photo.file? %>
+			<%= image_tag image.object.photo.url(:thumb) %>
+ 				<%= image.check_box :_destroy	%>
+			<%= image.label :_destroy, 'Eliminar' %>
 		<% end %>
 		<br />
 

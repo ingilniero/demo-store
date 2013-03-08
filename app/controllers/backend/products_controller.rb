@@ -1,12 +1,9 @@
 class Backend::ProductsController < ApplicationController
 	before_action :authenticate!
-
-
-	def show
-	end
+	before_action :make_inventory_infinite, only: [:create, :update]
 
 	def index
-		@products = current_admin.products
+		@products = Product.scope_products(current_admin).order(:id)
 	end
 
 	def new
@@ -16,12 +13,6 @@ class Backend::ProductsController < ApplicationController
 
 	def create
 		@product = current_admin.products.build(product_params)
-
-		unless params[:product][:images_attributes].nil?
-			params[:product][:images_attributes].each do | file, values |
-				@product.images.build values
-			end
-		end
 
 		if @product.save
 			flash[:notice] = "Producto creado correctamente."
@@ -42,17 +33,6 @@ class Backend::ProductsController < ApplicationController
 	def update
 		@product = Product.find(params[:id])
 
-		unless params[:product][:images_attributes].nil?
-			params[:product][:images_attributes].each do | file, values |
-				# if values.key?(:_destroy)
-				# 	@product.images = values
-				# 	logger.inspect(file)
-				# else
-					@product.images.build values.except(:_destroy)
-				# end
-			end
-		end
-
 		if @product.update_attributes(product_params)
 			flash[:notice] = "Producto actualizado correctamente."
 			redirect_to backend_products_path
@@ -64,14 +44,21 @@ class Backend::ProductsController < ApplicationController
 
 	protected
 		def product_params
-			params.require(:product).permit(:name, :description, :price, :inventory, :active)
+			params.require(:product).permit(:name, :description, :price, :inventory, :active, :infinite,
+			images_attributes: [:_destroy, :id, :photo])
 		end
 
 		def number_of_images_for( product )
-			Product::Max_Images - product.images.size
+			Product::Max_Images - product.images.count
 		end
 
 		def generate_image_fields_for( product )
 			number_of_images_for(product).times { product.images.build }
+		end
+
+		def make_inventory_infinite
+			unless params[:product].nil?
+				params[:product][:inventory] = '-1' if params[:product][:infinite] == '1'
+			end
 		end
 end
