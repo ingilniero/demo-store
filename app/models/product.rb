@@ -6,7 +6,7 @@ class Product < ActiveRecord::Base
 
 	accepts_nested_attributes_for :images, :limit => 5, :allow_destroy => true
 
-	validates :name, :description, :price, :inventory, :active , presence: true
+	validates :name, :description, :price, :inventory, presence: true
 	validates :name, :uniqueness => { :scope => :admin_id }
 	validates :price, numericality: true
 	validates :inventory, numericality: { :only_integer => true, :greater_than_or_equal_to => -1 }
