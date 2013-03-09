@@ -16,7 +16,7 @@ class Backend::ProductsController < ApplicationController
 
 		if @product.save
 			flash[:notice] = "Producto creado correctamente."
-			redirect_to backend_products_path
+			redirect_to backend_products_path(chrome_bug_workaround: 177855)
 		else
 			flash[:alert] = "Producto no se ha creado."
 			generate_image_fields_for @product
