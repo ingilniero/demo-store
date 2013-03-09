@@ -11,6 +11,7 @@ es:
 
   backend:
     session:
+      root: 'Dashboard'
       new:
         new_session: 'Iniciar sesion'
         email: 'Correo electronico'
@@ -31,6 +32,18 @@ es:
         email: 'Correo electronico'
       new:
         already_have_profile: 'Usted ya cuenta con perfil'
+
+    product:
+      title: 'Productos'
+      new: 'Nuevo Producto'
+      create_product: 'Crear Producto'
+      update_product: 'Actualizar Producto'
+      name: 'Nombre'
+      description: 'Descripcion'
+      price: 'Precio'
+      inventory: 'Inventario'
+      infinite: 'Infinito'
+      active: 'Activo'
 
   layouts:
     application:

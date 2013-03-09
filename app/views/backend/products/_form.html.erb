@@ -1,39 +1,36 @@
 <%= form_for [:backend, product], html: { multipart: true } do | form | %>
-<%= display_alert %>
-
-	<%= form.label :name %>
+	<%= form.label :name, t('backend.product.name') %>
 	<%= form.text_field :name %>
 	<br />
-	<%= form.label :description %>
+	<%= form.label :description, t('backend.product.description'), class: 'label-area' %>
 	<%= form.text_area :description %>
 	<br />
-	<%= form.label :price %>
+	<%= form.label :price, t('backend.product.price') %>
 	<%= form.text_field :price %>
 	<br />
-	<%= form.label :inventory %>
+	<%= form.label :inventory, t('backend.product.inventory') %>
 	<%= form.text_field :inventory %>
 	<%= form.check_box :infinite %>
-	<%= form.label 'Infinito' %>
+	<%= form.label t('backend.product.infinite') %>
 	<br />
-	<%= form.label :active %>
+	<%= form.label :active, t('backend.product.active') %>
 	<%= form.check_box :active %>
 	<br />
 	<hr />
 	<%= form.fields_for :images do | image | %>
+		<div class='product-image'>
+			<% if image.object.new_record? %>
+				<p><%= image.file_field :photo %></p>
+			<% end %>
 
-		<% if image.object.new_record? %>
-			<%= image.file_field :photo %>
-		<% end %>
-
-		<% if image.object.photo.file? %>
-			<%= image_tag image.object.photo.url(:thumb) %>
- 				<%= image.check_box :_destroy	%>
-			<%= image.label :_destroy, 'Eliminar' %>
-		<% end %>
-		<br />
-
+			<% if image.object.photo.file? %>
+				<%= image_tag image.object.photo.url(:thumb) %>
+					<%= image.label :_destroy, 'Eliminar', class: 'product-label' %>
+	 				<%= image.check_box :_destroy	%>
+			<% end %>
+		</div>
 	<% end %>
 	<div class='actions'>
-		<%= form.submit %>
+		<%= form.submit t(params[:action] == 'new' ? 'backend.product.create_product' : 'backend.product.update_product'), class: 'btn large' %>
 	</div>
 <% end %>

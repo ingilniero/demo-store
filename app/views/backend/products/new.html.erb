@@ -1,4 +1,6 @@
-<div id='conetent'>
-	<h2>Nuevo Producto</h2>
+<div id='content'>
+	<%= display_alert %>
+	<%= link_to t('backend.product.title'), backend_products_path %>
+	<h2><%= t('backend.product.new') %></h2>
 	<%= render partial: 'form', locals: { product: @product } %>
 </div>

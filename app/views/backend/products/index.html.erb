@@ -1,7 +1,12 @@
-<div><%= link_to 'Nuevo Producto', new_backend_product_path %></div>
+<%= display_notice %>
+<div>
+	<%= link_to t('backend.session.root'), backend_root_path %> |
+	<%= link_to t('backend.product.new'), new_backend_product_path %>
+</div>
 <ul>
 <% @products.each do | product | %>
 	<li><%= link_to product.name, edit_backend_product_path(product) %>
 	</li>
 <% end %>
 </ul>
+
